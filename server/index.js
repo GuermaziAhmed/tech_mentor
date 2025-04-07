@@ -1,0 +1,23 @@
+const express=require('express')
+require('dotenv').config();
+
+const app=express()
+const db=require('./db/config')
+const userRoutes = require('./routes/users')
+const coachRoutes = require('./routes/coaches')
+const reviewRoutes = require('./routes/reviews')
+const authRoutes = require('./routes/auth')
+const sessionRoutes = require('./routes/sessions')
+const cors=require('cors')
+const cookieParser=require('cookie-parser')
+app.use(cookieParser())
+app.use(cors())
+app.use(express.json())
+app.use('/users',userRoutes)
+app.use('/coaches',coachRoutes)
+app.use('/reviews',reviewRoutes)
+app.use('/auth',authRoutes)
+app.use('/session',sessionRoutes)
+app.listen(5000,()=>{
+    console.log("listeing at port 5000")
+})
